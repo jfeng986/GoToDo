@@ -2,14 +2,16 @@ package util
 
 import (
 	"fmt"
-	"os"
+	"log"
 	"strings"
 	"time"
+
+	"GoToDo/config"
 
 	"github.com/golang-jwt/jwt/v4"
 )
 
-var secret_key = []byte(os.Getenv("SECRET_KEY"))
+var secret_key = []byte(config.SecretKey)
 
 const TokenExpireDuration = time.Hour * 2
 
@@ -29,6 +31,7 @@ func GenerateToken(id uint, username string) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	log.Println("secret_key:", secret_key)
 	tokenString, err := token.SignedString(secret_key)
 	if err != nil {
 		return "", err

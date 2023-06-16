@@ -2,7 +2,6 @@ package util
 
 import (
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
@@ -31,7 +30,6 @@ func GenerateToken(id uint, username string) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	log.Println("secret_key:", secret_key)
 	tokenString, err := token.SignedString(secret_key)
 	if err != nil {
 		return "", err

@@ -83,3 +83,19 @@ func Login(userLogin model.User) UserDataResponse {
 		Token:   token,
 	}
 }
+
+func GetProfile(username string) ProfileDataResponse {
+	user, err := dao.FindOneUserByUsername(username)
+	if err != nil {
+		return ProfileDataResponse{
+			Code:    -1,
+			Message: "user not found",
+		}
+	}
+
+	return ProfileDataResponse{
+		Code:    200,
+		Message: "get profile success",
+		Profile: ProfileData{User: BuildUser(user)},
+	}
+}

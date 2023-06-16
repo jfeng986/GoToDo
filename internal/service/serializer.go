@@ -13,12 +13,23 @@ type User struct {
 	CreateAt string `json:"create_at"`
 }
 
+type ProfileData struct {
+	User User `json:"user"`
+}
+
 type UserDataResponse struct {
 	Code    int    `json:"code"`
 	User    User   `json:"user"`
 	Message string `json:"message"`
 	Error   string `json:"error"`
 	Token   string `json:"token"`
+}
+
+type ProfileDataResponse struct {
+	Code    int         `json:"code"`
+	Profile ProfileData `json:"profile"`
+	Message string      `json:"message"`
+	Error   string      `json:"error"`
 }
 
 func BuildUser(user model.User) User {

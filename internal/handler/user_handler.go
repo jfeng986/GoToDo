@@ -6,6 +6,7 @@ import (
 
 	"GoToDo/internal/repository/model"
 	"GoToDo/internal/service"
+	"GoToDo/util"
 
 	"github.com/gin-gonic/gin"
 )
@@ -35,4 +36,11 @@ func UserLoginHandler(c *gin.Context) {
 		c.JSON(http.StatusOK, res)
 		return
 	}
+}
+
+func GetProfileHandler(c *gin.Context) {
+	claims, _ := c.Get("claims")
+	username := claims.(*util.UserClaims).Username
+	res := service.GetProfile(username)
+	c.JSON(http.StatusOK, res)
 }

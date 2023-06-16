@@ -7,6 +7,10 @@ import (
 )
 
 var (
+	AppMode   string
+	HttpPort  string
+	SecretKey string
+
 	DbHost string
 	DbPort string
 	DbUser string
@@ -17,11 +21,17 @@ var (
 func init() {
 	file, err := ini.Load("./config/config.ini")
 	if err != nil {
-		log.Println("Configuration file reading error!")
+		log.Println("Configuration file reading error. Please check the file path: ", err)
 		log.Println(err)
-		return
 	}
+	LoadServer(file)
 	LoadMySQL(file)
+}
+
+func LoadServer(file *ini.File) {
+	AppMode = file.Section("app").Key("APP_MODE").String()
+	HttpPort = file.Section("app").Key("HTTP_PORT").String()
+	SecretKey = file.Section("app").Key("SECRET_KEY").String()
 }
 
 func LoadMySQL(file *ini.File) {

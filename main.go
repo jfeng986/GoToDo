@@ -1,7 +1,11 @@
 package main
 
-import "GoToDo/internal/repository/database"
+import (
+	"GoToDo/config"
+	"GoToDo/internal/router"
+)
 
 func main() {
-	database.Test()
+	r := router.NewRouter()
+	r.Run(config.HttpPort)
 }

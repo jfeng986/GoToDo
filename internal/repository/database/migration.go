@@ -9,7 +9,3 @@ func migration() {
 		return
 	}
 }
-
-func Test() {
-	return
-}

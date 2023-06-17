@@ -1,7 +1,7 @@
 package database
 
 import (
-	"fmt"
+	"log"
 	"strings"
 	"time"
 
@@ -40,7 +40,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("database connect success")
+		log.Println("database connect success")
 	}
 	sqlDB, _ := db.DB()
 	sqlDB.SetMaxIdleConns(20)

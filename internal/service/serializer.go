@@ -14,7 +14,8 @@ type User struct {
 }
 
 type ProfileData struct {
-	User User `json:"user"`
+	User  User   `json:"user"`
+	Tasks []Task `json:"tasks"`
 }
 
 type UserDataResponse struct {
@@ -45,4 +46,38 @@ func BuildUser(user model.User) User {
 		Username: user.Username,
 		CreateAt: user.CreatedAt.In(loc).Format("2006-01-02 15:04:05"),
 	}
+}
+
+type Task struct {
+	ID      uint         `json:"id"`
+	UserID  uint         `json:"user_id"`
+	Title   string       `json:"title"`
+	Content string       `json:"content"`
+	Status  model.Status `json:"status"`
+}
+
+type TaskDataResponse struct {
+	Code     int    `json:"code"`
+	Task     Task   `json:"task"`
+	TaskList []Task `json:"task_list"`
+	Message  string `json:"message"`
+	Error    string `json:"error"`
+}
+
+func BuildTask(task model.Task) Task {
+	return Task{
+		ID:      task.ID,
+		UserID:  task.UserID,
+		Title:   task.Title,
+		Content: task.Content,
+		Status:  task.Status,
+	}
+}
+
+func BuildTasks(tasks []model.Task) []Task {
+	var tasksData []Task
+	for _, task := range tasks {
+		tasksData = append(tasksData, BuildTask(task))
+	}
+	return tasksData
 }

@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"log"
 	"time"
 
 	"GoToDo/util"
@@ -12,9 +11,7 @@ import (
 func JWT(c *gin.Context) {
 	var code int
 	token := c.GetHeader("Authorization")
-	log.Println("token: ", token)
 	if token == "" {
-		log.Println("token: ", token)
 		code = -1
 	} else {
 		claims, err := util.ParseToken(token)

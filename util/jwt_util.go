@@ -1,7 +1,7 @@
 package util
 
 import (
-	"fmt"
+	"errors"
 	"strings"
 	"time"
 
@@ -50,7 +50,7 @@ func ParseToken(tokenString string) (*UserClaims, error) {
 		return nil, err
 	}
 	if !claims.Valid {
-		return nil, fmt.Errorf("parse token error:%v", err)
+		return nil, errors.New("invalid token")
 	}
 	return userClaim, nil
 }

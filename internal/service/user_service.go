@@ -92,10 +92,16 @@ func GetProfile(username string) ProfileDataResponse {
 			Message: "user not found",
 		}
 	}
-
+	tasks, err := dao.FindAllTasksByUserId(user.ID)
+	if err != nil {
+		return ProfileDataResponse{
+			Code:    -1,
+			Message: "find tasks failed",
+		}
+	}
 	return ProfileDataResponse{
 		Code:    200,
 		Message: "get profile success",
-		Profile: ProfileData{User: BuildUser(user)},
+		Profile: ProfileData{User: BuildUser(user), Tasks: BuildTasks(tasks)},
 	}
 }

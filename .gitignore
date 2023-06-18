@@ -2,3 +2,4 @@ config/config.ini
 go.sum
 /tmp
 .env
+.DS_Store
